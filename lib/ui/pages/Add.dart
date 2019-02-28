@@ -70,6 +70,7 @@ class _AddPageState extends State<AddPage> {
           color: Colors.white
         ),
         ),
+        backgroundColor: Colors.brown,
       ),
       body:
       Container(
