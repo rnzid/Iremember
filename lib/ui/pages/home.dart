@@ -11,15 +11,12 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage> {
   List item1 = [];
-  adding(String title,String description,File image){
+  adding(String title, String description, File _image) {
     setState(() {
-      item1.add({
-        "title": title,
-        "description":description,
-        "img": image
-      });
+      item1.add({"title": title, "description": description, "img": _image});
     });
   }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -28,31 +25,35 @@ class _HomePageState extends State<HomePage> {
         backgroundColor: Colors.brown,
       ),
       body: ListView.builder(
-       itemCount: item1.length,
-        itemBuilder: (BuildContext context, int  index) {
-          var item =item1[index];
+        itemCount: item1.length,
+        itemBuilder: (BuildContext context, int index) {
+          var item = item1[index];
           return ListTile(
-             onTap: ()=>Navigator.push(context, MaterialPageRoute(
-               builder: (_) => ItemDetails(item:item)
-             )), 
-                    isThreeLine: true,
+            onTap: () => Navigator.push(context,
+                MaterialPageRoute(builder: (_) => ItemDetails(item: item))),
+            isThreeLine: true,
             title: Text(item["title"]),
-            leading:CircleAvatar(
-              backgroundImage:FileImage(item["img"],),
-            radius:40,
+            leading: CircleAvatar(
+              backgroundImage: FileImage(
+                item["img"],
+              ),
+              radius: 35,
             ),
             subtitle: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: <Widget>[
                 Text(item["description"]),
-                SizedBox(height: 50,),
-                ],
-                    ),
+                SizedBox(
+                  height: 50,
+                ),
+              ],
+            ),
           );
         },
       ),
-        floatingActionButton: FloatingActionButton(
-        onPressed: ()=>Navigator.of(context).push(MaterialPageRoute(builder: (BuildContext context)=>AddPage(adding))),
+      floatingActionButton: FloatingActionButton(
+        onPressed: () => Navigator.of(context).push(MaterialPageRoute(
+            builder: (BuildContext context) => AddPage(adding))),
         tooltip: 'Add more item',
         child: Icon(Icons.add),
       ),
