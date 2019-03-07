@@ -1,45 +1,70 @@
 import 'package:flutter/material.dart';
-class ItemDetails extends StatelessWidget {
+import 'dart:io';
+import './home.dart';
+class DetailPage extends StatelessWidget {
   final Map item;
-  const ItemDetails({Key key, this.item}) : super(key: key);
+  const DetailPage({Key key, this.item}) : super(key: key);
+   _showDialog(BuildContext context) {
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return AlertDialog(
+          title: Text("Delete"),
+          content: Text("Are you sure ?"),
+          actions: <Widget>[
+            FlatButton(
+              child: Text("Delete"),
+              
+              onPressed: () => Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (BuildContext context)=>HomePage())),
+            ),
+            FlatButton(
+              child: Text("Cancel"),
+              onPressed: () => Navigator.pop(context),
+            ),
+          ],
+        );
+      },
+    barrierDismissible: false,
+    );
+  }
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Colors.cyanAccent,
       appBar: AppBar(
-        backgroundColor: Colors.lightBlue,
+        backgroundColor: Colors.blueAccent,
         title: Text(item["title"]),
+        actions: <Widget>[
+          IconButton(icon: Icon(Icons.delete),
+          onPressed: (){
+            _showDialog(context);
+            },)
+        ],
+        
       ),
       body: SingleChildScrollView(
-        padding: EdgeInsets.all(20.0),
+        padding: EdgeInsets.all(16.0),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: <Widget>[
             DecoratedBox(
-              child: Container(
-                height: 150,
-                width: 150,
+              child: Container(height: 400,width:400,
               ),
               decoration: BoxDecoration(
-                  image: DecorationImage(
-                image: FileImage(
-                  item["img"],
-                ),
-              )),
+                image: DecorationImage(
+                  image: FileImage(File(item["img"]),)
+                )
+              ),
             ),
-            Text(
-              item["title"],
-              style: Theme.of(context).textTheme.display1,
-            ),
-            SizedBox(
-              height: 30.0,
-            ),
+            Text(item["title"], style: Theme.of(context).textTheme.display1,),
+            SizedBox(height: 20.0,),
             Text(item["description"]),
-            SizedBox(
-              height: 40.0,
-            ),
+            SizedBox(height: 20.0,),
+            
           ],
         ),
       ),
-    );
+    ); 
   }
+  
 }
