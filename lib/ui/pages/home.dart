@@ -70,7 +70,7 @@ class _HomePageState extends State<HomePage> {
             children: <Widget>[
               ListTile(
                 onTap: () => Navigator.push(context,
-                    MaterialPageRoute(builder: (_) => DetailPage(item: item))),
+                    MaterialPageRoute(builder: (_) => DetailPage(item: item,removeItem: removeItem,))),
                 isThreeLine: true,
                 title: Text(item["title"]),
                 trailing: IconButton(

@@ -2,8 +2,17 @@ import 'package:flutter/material.dart';
 import 'dart:io';
 import './home.dart';
 class DetailPage extends StatelessWidget {
+  
+  //final String title;
+  //final String description;
+  //final File _image;
+  final Function removeItem;
   final Map item;
-  const DetailPage({Key key, this.item}) : super(key: key);
+  // void initState() {
+  //   super.initState();
+  //   removeItem(item);
+  // }
+  const DetailPage({Key key, this.item,this.removeItem}) : super(key: key);
    _showDialog(BuildContext context) {
     showDialog(
       context: context,
@@ -14,9 +23,14 @@ class DetailPage extends StatelessWidget {
           actions: <Widget>[
             FlatButton(
               child: Text("Delete"),
+              //removeItem(title, description, _image),
               
-              onPressed: () => Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (BuildContext context)=>HomePage())),
-            ),
+            onPressed: () {
+              removeItem(item);
+               Navigator.of(context).pushReplacement(MaterialPageRoute(
+              builder: (BuildContext context)=>HomePage())
+              );
+}            ),
             FlatButton(
               child: Text("Cancel"),
               onPressed: () => Navigator.pop(context),
