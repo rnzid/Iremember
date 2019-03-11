@@ -1,10 +1,10 @@
 import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
+import '../../models/item_model.dart';
+import '../../resources/db_provider.dart';
 
 class AddPage extends StatefulWidget {
-  final Function add;
-  AddPage(this.add);
   @override
   _AddPageState createState() => _AddPageState();
 }
@@ -160,7 +160,11 @@ class _AddPageState extends State<AddPage> {
               if (title == null || description == null || _image == null) {
                 return;
               }
-              widget.add(title, description, _image);
+              ItemModel item =ItemModel(title: title,
+              description: description,
+              image: _image.path
+              );
+              DbProvider().addItem(item);
               Navigator.pop(context);
             },
           ),

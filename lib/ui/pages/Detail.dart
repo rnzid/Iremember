@@ -1,3 +1,4 @@
+import 'package:app4/models/item_model.dart';
 import 'package:flutter/material.dart';
 import 'dart:io';
 import './home.dart';
@@ -7,7 +8,7 @@ class DetailPage extends StatelessWidget {
   //final String description;
   //final File _image;
   final Function removeItem;
-  final Map item;
+  final ItemModel item;
   // void initState() {
   //   super.initState();
   //   removeItem(item);
@@ -47,7 +48,7 @@ class DetailPage extends StatelessWidget {
       backgroundColor: Colors.cyanAccent,
       appBar: AppBar(
         backgroundColor: Colors.blueAccent,
-        title: Text(item["title"]),
+        title: Text(item.title),
         actions: <Widget>[
           IconButton(icon: Icon(Icons.delete),
           onPressed: (){
@@ -66,13 +67,13 @@ class DetailPage extends StatelessWidget {
               ),
               decoration: BoxDecoration(
                 image: DecorationImage(
-                  image: FileImage(File(item["img"]),)
+                  image: FileImage(File(item.image),)
                 )
               ),
             ),
-            Text(item["title"], style: Theme.of(context).textTheme.display1,),
+            Text(item.title, style: Theme.of(context).textTheme.display1,),
             SizedBox(height: 20.0,),
-            Text(item["description"]),
+            Text(item.description),
             SizedBox(height: 20.0,),
             
           ],
